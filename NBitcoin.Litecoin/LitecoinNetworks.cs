@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace NBitcoin.Litecoin
 {
-	public class LitecoinNetworks
+	public class Networks
 	{
 		//Format visual studio
 		//{({.*?}), (.*?)}

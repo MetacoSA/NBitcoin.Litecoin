@@ -9,7 +9,7 @@ namespace NBitcoin.Litecoin.Tests
         [Fact]
         public void Test1()
         {
-			LitecoinNetworks.Register();
+			Networks.Register();
         }
     }
 }

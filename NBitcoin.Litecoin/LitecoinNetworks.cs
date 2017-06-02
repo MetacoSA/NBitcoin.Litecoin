@@ -113,7 +113,8 @@ namespace NBitcoin.Litecoin
 				MinerConfirmationWindow = 8064,
 				CoinbaseMaturity = 100,
 				HashGenesisBlock = new uint256("12a765e31ffd4059bada1e25190f6e98c99d9714d334efa41a195a7e7e04bfe2"),
-				GetPoWHash = GetPoWHash
+				GetPoWHash = GetPoWHash,
+				LitecoinWorkCalculation = true
 			})
 			.SetBase58Bytes(Base58Type.PUBKEY_ADDRESS, new byte[] { 48 })
 			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 50 })
@@ -156,7 +157,8 @@ namespace NBitcoin.Litecoin
 				MinerConfirmationWindow = 2016,
 				CoinbaseMaturity = 100,
 				HashGenesisBlock = new uint256("f5ae71e26c74beacc88382716aced69cddf3dffff24f384e1808905e0188f68f"),
-				GetPoWHash = GetPoWHash
+				GetPoWHash = GetPoWHash,
+				LitecoinWorkCalculation = true
 			})
 			.SetBase58Bytes(Base58Type.PUBKEY_ADDRESS, new byte[] { 111 })
 			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 58 })

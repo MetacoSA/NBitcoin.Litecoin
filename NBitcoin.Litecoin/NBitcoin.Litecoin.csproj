@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard1.3;net45</TargetFrameworks>
 	<PackageId>NBitcoin.Litecoin</PackageId>
-	<PackageVersion>1.0.0.4</PackageVersion>
+	<PackageVersion>1.0.0.5</PackageVersion>
 	<Authors>Nicolas Dorier</Authors>
 	<Description>Networks instances for Litecoin</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Copyright>Copyright 2017 (c) Metaco SA. All rights reserved.</Copyright>
 	<PackageTags>litecoin</PackageTags>
-	<AssemblyVersion>1.0.0.4</AssemblyVersion>
-	<FileVersion>1.0.0.4</FileVersion>
+	<AssemblyVersion>1.0.0.5</AssemblyVersion>
+	<FileVersion>1.0.0.5</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

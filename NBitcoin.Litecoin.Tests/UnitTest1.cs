@@ -12,6 +12,11 @@ namespace NBitcoin.Litecoin.Tests
         {
 			Networks.Register();
 			BitcoinAddress.Create("LQQGtMCw3KgdpZHLzqysfYbqFpzgnigNjM", Networks.Mainnet);
+			BitcoinAddress.Create("lc1q23fmtv8y22w32v598decqehh3aldsrzuc0hf69", Networks.Mainnet);
+			BitcoinAddress.Create("tl1q94jkeq6atzlhek4mmay8ftj3yss3e6j4499kws", Networks.Testnet);
+			Assert.Equal(Networks.Testnet, BitcoinAddress.Create("tl1q94jkeq6atzlhek4mmay8ftj3yss3e6j4499kws").Network);
+			Assert.Equal(Networks.Mainnet, BitcoinAddress.Create("lc1q23fmtv8y22w32v598decqehh3aldsrzuc0hf69").Network);
+			Assert.Throws<FormatException>(() => BitcoinAddress.Create("tl1q94jkeq6atzlhek4mmay8ftj3yss3e6j4499kws", Networks.Mainnet));
 
 			var header = new BlockHeader("01000000f615f7ce3b4fc6b8f61e8f89aedb1d0852507650533a9e3b10b9bbcc30639f279fcaa86746e1ef52d3edb3c4ad8259920d509bd073605c9bf1d59983752a6b06b817bb4ea78e011d012d59d4");
 			Assert.Equal("adf6e2e56df692822f5e064a8b6404a05d67cccd64bc90f57f65b46805e9a54b", header.ToString());

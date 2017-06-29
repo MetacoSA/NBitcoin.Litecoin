@@ -117,7 +117,7 @@ namespace NBitcoin.Litecoin
 				LitecoinWorkCalculation = true
 			})
 			.SetBase58Bytes(Base58Type.PUBKEY_ADDRESS, new byte[] { 48 })
-			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 50 })
+			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 5 })
 			.SetBase58Bytes(Base58Type.SECRET_KEY, new byte[] { 176 })
 			.SetBase58Bytes(Base58Type.EXT_PUBLIC_KEY, new byte[] { 0x04, 0x88, 0xB2, 0x1E })
 			.SetBase58Bytes(Base58Type.EXT_SECRET_KEY, new byte[] { 0x04, 0x88, 0xAD, 0xE4 })
@@ -163,7 +163,7 @@ namespace NBitcoin.Litecoin
 				LitecoinWorkCalculation = true
 			})
 			.SetBase58Bytes(Base58Type.PUBKEY_ADDRESS, new byte[] { 111 })
-			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 58 })
+			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 196 })
 			.SetBase58Bytes(Base58Type.SECRET_KEY, new byte[] { 239 })
 			.SetBase58Bytes(Base58Type.EXT_PUBLIC_KEY, new byte[] { 0x04, 0x35, 0x87, 0xCF })
 			.SetBase58Bytes(Base58Type.EXT_SECRET_KEY, new byte[] { 0x04, 0x35, 0x83, 0x94 })

@@ -4,6 +4,8 @@ using NBitcoin.Protocol;
 using System;
 using System.Net;
 using System.Collections.Generic;
+using NBitcoin.RPC;
+using System.IO;
 
 namespace NBitcoin.Litecoin
 {
@@ -185,6 +187,77 @@ namespace NBitcoin.Litecoin
 			.AddSeeds(ToSeed(pnSeed6_test))
 			.SetGenesis(new Block(Encoders.Hex.DecodeData("010000000000000000000000000000000000000000000000000000000000000000000000d9ced4ed1130f7b7faad9be25323ffafa33232a17c3edf6cfd97bee6bafbdd97f6028c4ef0ff0f1e38c3f6160101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4804ffff001d0104404e592054696d65732030352f4f63742f32303131205374657665204a6f62732c204170706c65e280997320566973696f6e6172792c2044696573206174203536ffffffff0100f2052a010000004341040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9ac00000000")))
 			.BuildAndRegister();
+
+			builder = new NetworkBuilder();
+			port = 19444;
+			_Regtest = builder.SetConsensus(new Consensus()
+			{
+				SubsidyHalvingInterval = 150,
+				MajorityEnforceBlockUpgrade = 51,
+				MajorityRejectBlockOutdated = 75,
+				MajorityWindow = 144,
+				PowLimit = new Target(new uint256("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")),
+				PowTargetTimespan = TimeSpan.FromSeconds(3.5 * 24 * 60 * 60),
+				PowTargetSpacing = TimeSpan.FromSeconds(2.5 * 60),
+				PowAllowMinDifficultyBlocks = true,
+				MinimumChainWork = uint256.Zero,
+				PowNoRetargeting = true,
+				RuleChangeActivationThreshold = 108,
+				MinerConfirmationWindow = 2016,
+				CoinbaseMaturity = 100,
+				HashGenesisBlock = new uint256("f5ae71e26c74beacc88382716aced69cddf3dffff24f384e1808905e0188f68f"),
+				GetPoWHash = GetPoWHash,
+				LitecoinWorkCalculation = true
+			})
+			.SetBase58Bytes(Base58Type.PUBKEY_ADDRESS, new byte[] { 111 })
+			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 58 })
+			.SetBase58Bytes(Base58Type.SECRET_KEY, new byte[] { 239 })
+			.SetBase58Bytes(Base58Type.EXT_PUBLIC_KEY, new byte[] { 0x04, 0x35, 0x87, 0xCF })
+			.SetBase58Bytes(Base58Type.EXT_SECRET_KEY, new byte[] { 0x04, 0x35, 0x83, 0x94 })
+			.SetBech32(Bech32Type.WITNESS_PUBKEY_ADDRESS, Encoders.Bech32("tltc"))
+			.SetBech32(Bech32Type.WITNESS_SCRIPT_ADDRESS, Encoders.Bech32("tltc"))
+			.SetMagic(0xdab5bffa)
+			.SetPort(port)
+			.SetRPCPort(19332)
+			.SetName("ltc-reg")
+			.AddAlias("ltc-regtest")
+			.AddAlias("litecoin-reg")
+			.AddAlias("litecoin-regtest")
+			.SetGenesis(new Block(Encoders.Hex.DecodeData("010000000000000000000000000000000000000000000000000000000000000000000000d9ced4ed1130f7b7faad9be25323ffafa33232a17c3edf6cfd97bee6bafbdd97dae5494dffff7f20000000000101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4804ffff001d0104404e592054696d65732030352f4f63742f32303131205374657665204a6f62732c204170706c65e280997320566973696f6e6172792c2044696573206174203536ffffffff0100f2052a010000004341040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9ac00000000")))
+			.BuildAndRegister();
+
+			var home = Environment.GetEnvironmentVariable("HOME");
+			var localAppData = Environment.GetEnvironmentVariable("APPDATA");
+
+			if(string.IsNullOrEmpty(home) && string.IsNullOrEmpty(localAppData))
+				return;
+
+			if(!string.IsNullOrEmpty(home))
+			{
+				var bitcoinFolder = Path.Combine(home, ".litecoin");
+
+				var mainnet = Path.Combine(bitcoinFolder, ".cookie");
+				RPCClient.RegisterDefaultCookiePath(Networks.Mainnet, mainnet);
+
+				var testnet = Path.Combine(bitcoinFolder, "testnet3", ".cookie");
+				RPCClient.RegisterDefaultCookiePath(Networks.Testnet, testnet);
+
+				var regtest = Path.Combine(bitcoinFolder, "regtest", ".cookie");
+				RPCClient.RegisterDefaultCookiePath(Networks.Regtest, regtest);
+			}
+			else if(!string.IsNullOrEmpty(localAppData))
+			{
+				var bitcoinFolder = Path.Combine(localAppData, "Litecoin");
+
+				var mainnet = Path.Combine(bitcoinFolder, ".cookie");
+				RPCClient.RegisterDefaultCookiePath(Networks.Mainnet, mainnet);
+
+				var testnet = Path.Combine(bitcoinFolder, "testnet3", ".cookie");
+				RPCClient.RegisterDefaultCookiePath(Networks.Testnet, testnet);
+
+				var regtest = Path.Combine(bitcoinFolder, "regtest", ".cookie");
+				RPCClient.RegisterDefaultCookiePath(Networks.Regtest, regtest);
+			}
 		}
 
 		static uint256 GetPoWHash(BlockHeader header)
@@ -215,6 +288,16 @@ namespace NBitcoin.Litecoin
 		{
 			if(_Mainnet == null)
 				throw new InvalidOperationException("You need to call LitecoinNetworks.Register() before using the litecoin networks");
+		}
+
+		private static Network _Regtest;
+		public static Network Regtest
+		{
+			get
+			{
+				AssertRegistered();
+				return _Regtest;
+			}
 		}
 
 		private static Network _Testnet;

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard1.3;net452;net461</TargetFrameworks>
 	<PackageId>NBitcoin.Litecoin</PackageId>
 	<PackageVersion>1.0.0.7</PackageVersion>
 	<Authors>Nicolas Dorier</Authors>
@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NBitcoin" Version="4.0.0.4" />
+    <PackageReference Include="NBitcoin" Version="4.0.0.50" />
   </ItemGroup>
 
 </Project>

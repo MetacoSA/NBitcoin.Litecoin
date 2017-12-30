@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard1.3;net452;net461</TargetFrameworks>
 	<PackageId>NBitcoin.Litecoin</PackageId>
-	<PackageVersion>1.0.0.7</PackageVersion>
+	<PackageVersion>1.0.0.8</PackageVersion>
 	<Authors>Nicolas Dorier</Authors>
 	<Description>Networks instances for Litecoin</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

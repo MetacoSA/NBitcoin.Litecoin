@@ -95,7 +95,21 @@ namespace NBitcoin.Litecoin
 	Tuple.Create(new byte[]{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xff,0xff,0x42,0xb2,0xb6,0x23}, 19335)
 };
 
+		[Obsolete("Use EnsureRegistered instead")]
 		public static void Register()
+		{
+			EnsureRegistered();
+		}
+		public static void EnsureRegistered()
+		{
+			if(_LazyRegistered.IsValueCreated)
+				return;
+			// This will cause RegisterLazy to evaluate
+			new Lazy<object>[] { _LazyRegistered }.Select(o => o.Value != null).ToList();
+		}
+		static Lazy<object> _LazyRegistered = new Lazy<object>(RegisterLazy, false);
+
+		private static object RegisterLazy()
 		{
 			var port = 9333;
 			NetworkBuilder builder = new NetworkBuilder();
@@ -230,34 +244,35 @@ namespace NBitcoin.Litecoin
 			var localAppData = Environment.GetEnvironmentVariable("APPDATA");
 
 			if(string.IsNullOrEmpty(home) && string.IsNullOrEmpty(localAppData))
-				return;
+				return new object();
 
 			if(!string.IsNullOrEmpty(home))
 			{
 				var bitcoinFolder = Path.Combine(home, ".litecoin");
 
 				var mainnet = Path.Combine(bitcoinFolder, ".cookie");
-				RPCClient.RegisterDefaultCookiePath(Networks.Mainnet, mainnet);
+				RPCClient.RegisterDefaultCookiePath(Networks._Mainnet, mainnet);
 
 				var testnet = Path.Combine(bitcoinFolder, "testnet3", ".cookie");
-				RPCClient.RegisterDefaultCookiePath(Networks.Testnet, testnet);
+				RPCClient.RegisterDefaultCookiePath(Networks._Testnet, testnet);
 
 				var regtest = Path.Combine(bitcoinFolder, "regtest", ".cookie");
-				RPCClient.RegisterDefaultCookiePath(Networks.Regtest, regtest);
+				RPCClient.RegisterDefaultCookiePath(Networks._Regtest, regtest);
 			}
 			else if(!string.IsNullOrEmpty(localAppData))
 			{
 				var bitcoinFolder = Path.Combine(localAppData, "Litecoin");
 
 				var mainnet = Path.Combine(bitcoinFolder, ".cookie");
-				RPCClient.RegisterDefaultCookiePath(Networks.Mainnet, mainnet);
+				RPCClient.RegisterDefaultCookiePath(Networks._Mainnet, mainnet);
 
 				var testnet = Path.Combine(bitcoinFolder, "testnet3", ".cookie");
-				RPCClient.RegisterDefaultCookiePath(Networks.Testnet, testnet);
+				RPCClient.RegisterDefaultCookiePath(Networks._Testnet, testnet);
 
 				var regtest = Path.Combine(bitcoinFolder, "regtest", ".cookie");
-				RPCClient.RegisterDefaultCookiePath(Networks.Regtest, regtest);
+				RPCClient.RegisterDefaultCookiePath(Networks._Regtest, regtest);
 			}
+			return new object();
 		}
 
 		static uint256 GetPoWHash(BlockHeader header)
@@ -279,15 +294,9 @@ namespace NBitcoin.Litecoin
 		{
 			get
 			{
-				AssertRegistered();
+				EnsureRegistered();
 				return _Mainnet;
 			}
-		}
-
-		private static void AssertRegistered()
-		{
-			if(_Mainnet == null)
-				throw new InvalidOperationException("You need to call LitecoinNetworks.Register() before using the litecoin networks");
 		}
 
 		private static Network _Regtest;
@@ -295,7 +304,7 @@ namespace NBitcoin.Litecoin
 		{
 			get
 			{
-				AssertRegistered();
+				EnsureRegistered();
 				return _Regtest;
 			}
 		}
@@ -305,7 +314,7 @@ namespace NBitcoin.Litecoin
 		{
 			get
 			{
-				AssertRegistered();
+				EnsureRegistered();
 				return _Testnet;
 			}
 		}

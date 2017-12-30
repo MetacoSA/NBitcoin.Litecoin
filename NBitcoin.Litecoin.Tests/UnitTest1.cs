@@ -10,7 +10,8 @@ namespace NBitcoin.Litecoin.Tests
         [Fact]
         public void Test1()
         {
-			Networks.Register();
+			Networks.EnsureRegistered();
+			Networks.EnsureRegistered(); // should do nothing
 			BitcoinAddress.Create("LQQGtMCw3KgdpZHLzqysfYbqFpzgnigNjM", Networks.Mainnet);
 			BitcoinAddress.Create("ltc1q7ggs95p9yhh8lf4fy2ek5cv7uusfstsfulvc3u", Networks.Mainnet);
 			BitcoinAddress.Create("tltc1qu5gkdjj5zxakj2kcnyc77djsqqft4pvux4krzxplscurn8mqhlkqt9qzmr", Networks.Testnet);

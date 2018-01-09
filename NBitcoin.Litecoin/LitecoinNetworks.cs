@@ -157,8 +157,7 @@ namespace NBitcoin.Litecoin
 			.AddSeeds(ToSeed(pnSeed6_main))
 			.SetGenesis(new Block(Encoders.Hex.DecodeData("010000000000000000000000000000000000000000000000000000000000000000000000d9ced4ed1130f7b7faad9be25323ffafa33232a17c3edf6cfd97bee6bafbdd97b9aa8e4ef0ff0f1ecd513f7c0101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4804ffff001d0104404e592054696d65732030352f4f63742f32303131205374657665204a6f62732c204170706c65e280997320566973696f6e6172792c2044696573206174203536ffffffff0100f2052a010000004341040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9ac00000000")))
 			.BuildAndRegister();
-
-			// testnet4
+			
 			builder = new NetworkBuilder();
 			port = 19335;
 			_Testnet = builder.SetConsensus(new Consensus()
@@ -188,7 +187,7 @@ namespace NBitcoin.Litecoin
 			.SetBech32(Bech32Type.WITNESS_SCRIPT_ADDRESS, Encoders.Bech32("tltc"))
 			.SetMagic(0xf1c8d2fd)
 			.SetPort(port)
-			.SetRPCPort(19334)
+			.SetRPCPort(19332)
 			.SetName("ltc-test")
 			.AddAlias("ltc-testnet")
 			.AddAlias("litecoin-test")
@@ -200,15 +199,7 @@ namespace NBitcoin.Litecoin
 				new DNSSeedData("thrasher.io", "dnsseed-testnet.thrasher.io"),
 			})
 			.AddSeeds(ToSeed(pnSeed6_test))
-			.SetGenesis(new Block(new BlockHeader
-			{
-				Version = 1,
-				BlockTime = Utils.UnixTimeToDateTime(1486949366),
-				Nonce = 293345,
-				Bits = 504365040,
-				HashPrevBlock = 0,
-				HashMerkleRoot = uint256.Parse("97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9")
-			}))
+			.SetGenesis(new Block(Encoders.Hex.DecodeData("010000000000000000000000000000000000000000000000000000000000000000000000d9ced4ed1130f7b7faad9be25323ffafa33232a17c3edf6cfd97bee6bafbdd97f60ba158f0ff0f1ee179040000")))
 			.BuildAndRegister();
 
 			builder = new NetworkBuilder();
@@ -241,20 +232,12 @@ namespace NBitcoin.Litecoin
 			.SetBech32(Bech32Type.WITNESS_SCRIPT_ADDRESS, Encoders.Bech32("tltc"))
 			.SetMagic(0xdab5bffa)
 			.SetPort(port)
-			.SetRPCPort(19334)
+			.SetRPCPort(19332)
 			.SetName("ltc-reg")
 			.AddAlias("ltc-regtest")
 			.AddAlias("litecoin-reg")
 			.AddAlias("litecoin-regtest")
-			.SetGenesis(new Block(new BlockHeader
-			{
-				Version = 1,
-				BlockTime = Utils.UnixTimeToDateTime(1486949366),
-				Nonce = 293345,
-				Bits = 504365040,
-				HashPrevBlock = 0,
-				HashMerkleRoot = uint256.Parse("97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9")
-			}))
+			.SetGenesis(new Block(Encoders.Hex.DecodeData("010000000000000000000000000000000000000000000000000000000000000000000000d9ced4ed1130f7b7faad9be25323ffafa33232a17c3edf6cfd97bee6bafbdd97f60ba158f0ff0f1ee179040000")))
 			.BuildAndRegister();
 
 			var home = Environment.GetEnvironmentVariable("HOME");

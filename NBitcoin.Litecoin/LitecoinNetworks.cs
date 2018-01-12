@@ -253,7 +253,7 @@ namespace NBitcoin.Litecoin
 				var mainnet = Path.Combine(bitcoinFolder, ".cookie");
 				RPCClient.RegisterDefaultCookiePath(Networks._Mainnet, mainnet);
 
-				var testnet = Path.Combine(bitcoinFolder, "testnet3", ".cookie");
+				var testnet = Path.Combine(bitcoinFolder, "testnet4", ".cookie");
 				RPCClient.RegisterDefaultCookiePath(Networks._Testnet, testnet);
 
 				var regtest = Path.Combine(bitcoinFolder, "regtest", ".cookie");
@@ -266,7 +266,7 @@ namespace NBitcoin.Litecoin
 				var mainnet = Path.Combine(bitcoinFolder, ".cookie");
 				RPCClient.RegisterDefaultCookiePath(Networks._Mainnet, mainnet);
 
-				var testnet = Path.Combine(bitcoinFolder, "testnet3", ".cookie");
+				var testnet = Path.Combine(bitcoinFolder, "testnet4", ".cookie");
 				RPCClient.RegisterDefaultCookiePath(Networks._Testnet, testnet);
 
 				var regtest = Path.Combine(bitcoinFolder, "regtest", ".cookie");

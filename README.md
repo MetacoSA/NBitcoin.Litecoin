@@ -1,3 +1,10 @@
+*******************
+
+DEPRECATED: THIS PROJECT HAS BEEN MOVED TO https://github.com/MetacoSA/NBitcoin/tree/master/NBitcoin.Altcoins
+
+*******************
+
+
 # NBitcoin.Litecoin
 
 This project allows NBitcoin to support Litecoin.
